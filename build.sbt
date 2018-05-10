@@ -4,7 +4,7 @@ version := "0.0.1-SNAPSHOT"
 
 organization := "org.clulab"
 
-scalaVersion := "2.12.4"
+scalaVersion := "2.12.6"
 
 libraryDependencies := Seq(
     "ai.lum" %% "common" % "0.0.8",
