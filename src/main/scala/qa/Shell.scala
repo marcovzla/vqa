@@ -69,8 +69,7 @@ object Shell extends LazyLogging {
               case "" => ()
               case ":exit" => running = false
               case s if s startsWith "#" => ()
-              case s if s startsWith ":" =>
-                println(s"unrecognized command '$s'")
+              case s if s startsWith ":" => println(s"unrecognized command '$s'")
               case pattern => search(pattern, 10)
             }
           }
