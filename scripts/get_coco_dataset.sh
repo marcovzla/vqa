@@ -1,18 +1,32 @@
 #!/bin/bash
 
+# validate command line arguments
+if [ $# == 0 ]; then
+    echo "no arguments given"
+    exit 1
+fi
+
+# use specified directory
+mkdir -p $1
+pushd $1
+
 # download images
 mkdir images
-cd images
-curl -O http://images.cocodataset.org/zips/train2014.zip 
-curl -O http://images.cocodataset.org/zips/val2014.zip
-unzip train2014.zip
-unzip val2014.zip
+pushd images
+curl -O http://images.cocodataset.org/zips/train2017.zip
+curl -O http://images.cocodataset.org/zips/val2017.zip
+unzip train2017.zip
+unzip val2017.zip
 
 # download annotations
-cd ..
+popd
 mkdir annotations
-cd annotations
-curl -O http://images.cocodataset.org/annotations/annotations_trainval2014.zip
-curl -O http://images.cocodataset.org/annotations/image_info_test2014.zip
-unzip annotations_trainval2014.zip
-unzip image_info_test2014.zip
+pushd annotations
+curl -O http://images.cocodataset.org/annotations/annotations_trainval2017.zip
+curl -O http://images.cocodataset.org/annotations/stuff_annotations_trainval2017.zip
+unzip annotations_trainval2017.zip
+unzip stuff_annotations_trainval2017.zip
+
+# back to where we started
+popd
+popd
