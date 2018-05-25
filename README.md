@@ -1,6 +1,6 @@
 # vqa
 
-## jenny
+## coco on jenny
 
 These are instructions to install the coco api in jenny.
 We assume you are using conda.
@@ -47,4 +47,23 @@ $ ps aux | grep localhost:8888
 marco     4947  0.0  0.0 168464  3588 ?        Ss   01:04   0:00 ssh -N -f -L localhost:8888:localhost:8888 jenny
 marco     5276  0.0  0.0 119532  1048 pts/2    S+   01:13   0:00 grep --color=auto localhost:8888
 $ kill -9 4947
+```
+
+### yolo9000 on jenny
+
+```
+git clone --recursive https://github.com/philipperemy/yolo-9000.git
+cd yolo-9000
+cat yolo9000-weights/x* > yolo9000-weights/yolo9000.weights # it was generated from split -b 95m yolo9000.weights
+md5sum yolo9000-weights/yolo9000.weights
+# d74ee8d5909f3b7446e9b350b4dd0f44  yolo9000.weights
+cd darknet
+vim Makefile
+# change first two lines to GPU=1 and CUDNN=1
+make
+```
+
+Test things are working:
+```
+./darknet detector test cfg/combine9k.data cfg/yolo9000.cfg ../yolo9000-weights/yolo9000.weights data/dog.jpg
 ```
