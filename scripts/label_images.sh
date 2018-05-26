@@ -14,7 +14,7 @@ pushd $darknet
 
 for image in $imagedir/*.jpg; do
     labels="$outdir/$(basename "$image" ".jpg").txt"
-    ./darknet detector test cfg/combine9k.data cfg/yolo9000.cfg ../yolo9000-weights/yolo9000.weights $image > $labels
+    ./darknet detect cfg/yolov3.cfg yolov3.weights $image > $labels
 done
 
 popd
