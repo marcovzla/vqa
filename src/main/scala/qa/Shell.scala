@@ -2,7 +2,6 @@ package qa
 
 import java.io.File
 import java.nio.file.Path
-import scala.util.Try
 import scala.util.control.NonFatal
 import jline.console.ConsoleReader
 import jline.console.history.FileHistory
@@ -47,8 +46,8 @@ object Shell extends LazyLogging {
       println("---")
       for (hit <- results.scoreDocs) {
         val doc = indexSearcher.doc(hit.doc)
-        val question = Try(doc.getField("question").stringValue)
-        val answer = Try(doc.getField("answer").stringValue)
+        val question = Option(doc.getField("question")).map(_.stringValue)
+        val answer = Option(doc.getField("answer")).map(_.stringValue)
         val text = (question orElse answer).get
         println(text)
         println("---")
