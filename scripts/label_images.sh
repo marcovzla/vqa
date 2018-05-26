@@ -10,6 +10,9 @@ imagedir="$(absolute_path "$1")"
 outdir="$(absolute_path "$2")"
 darknet="$(absolute_path "$3")"
 
+# ensure output directory exists
+mkdir -p $outdir
+
 pushd $darknet
 
 for image in $imagedir/*.jpg; do
