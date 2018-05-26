@@ -8,7 +8,6 @@ scalaVersion := "2.12.6"
 
 libraryDependencies := Seq(
     "ai.lum" %% "common" % "0.0.8",
-    /* "org.jline" % "jline" % "3.0.2", */
     "jline" % "jline" % "2.14.2",
     "org.apache.lucene" % "lucene-core" % "6.6.0",
     "org.apache.lucene" % "lucene-queryparser" % "6.6.0",
