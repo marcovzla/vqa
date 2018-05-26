@@ -49,7 +49,7 @@ marco     5276  0.0  0.0 119532  1048 pts/2    S+   01:13   0:00 grep --color=au
 $ kill -9 4947
 ```
 
-### yolo9000 on jenny
+### yolov3 on jenny
 
 ```
 git clone https://github.com/pjreddie/darknet
