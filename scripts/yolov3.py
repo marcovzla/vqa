@@ -7,6 +7,8 @@ from ctypes import *
 import math
 import random
 import glob
+import argparse
+import os
 
 def sample(probs):
     s = sum(probs)
@@ -149,9 +151,23 @@ def detect(net, meta, image, thresh=.5, hier_thresh=.5, nms=.45):
     return res
 
 if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('indir')
+    parser.add_argument('outdir')
+    args = parser.parse_args()
+
+    if not os.path.exists(args.outdir):
+        os.makedirs(args.outdir)
+
     net = load_net("cfg/yolov3.cfg", "yolov3.weights", 0)
     meta = load_meta("cfg/coco.data")
-    for jpg in glob.glob('data/*.jpg'):
+
+    for jpg in glob.glob(os.path.join(args.indir, '*.jpg')):
         print jpg
-        r = detect(net, meta, jpg)
-        print r
+        out = os.path.join(args.outdir, os.path.basename(jpg) + '.tsv')
+        results = detect(net, meta, jpg)
+
+        with open(out, 'w') as f:
+            for (label, prob, (x, y, w, h)) in results:
+                f.write('\t'.join(map(str, [label, prob, x, y, w, h])) + '\n')
