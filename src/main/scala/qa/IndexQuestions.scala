@@ -41,7 +41,8 @@ object IndexQuestions extends LazyLogging {
   }
 
   def mkDocumentBlock(q: Question): Collection[Document] = {
-    val block = mkQuestionDocument(q) +: q.answers.map(mkAnswerDocument)
+    // the child documents must appear first, ending with the parent document
+    val block = q.answers.map(mkAnswerDocument) :+ mkQuestionDocument(q)
     block.asJava
   }
 
