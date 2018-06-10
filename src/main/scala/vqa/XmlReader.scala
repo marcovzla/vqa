@@ -1,4 +1,4 @@
-package qa
+package vqa
 
 import scala.xml.{ Node, XML }
 
